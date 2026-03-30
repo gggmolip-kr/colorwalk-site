@@ -5,8 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>색감채집 — 매일 새로운 색을 채집하세요</title>
   <meta name="description" content="매일 하나의 팬톤 컬러를 받고, 일상에서 그 색을 찾아 9장의 사진으로 완성하는 컬러 채집 앱.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -20,8 +19,8 @@
       --text-dim: #7a7a85;
       --text-muted: #4a4a55;
       --radius: 20px;
-      --font-display: 'DM Serif Display', Georgia, serif;
-      --font-body: 'Outfit', -apple-system, sans-serif;
+      --font-display: 'Pretendard Variable', 'Pretendard', -apple-system, sans-serif;
+      --font-body: 'Pretendard Variable', 'Pretendard', -apple-system, sans-serif;
     }
 
     html { scroll-behavior: smooth; }
@@ -72,7 +71,7 @@
     .hero h1 {
       font-family: var(--font-display);
       font-size: clamp(36px, 5.5vw, 64px);
-      font-weight: 400;
+      font-weight: 700;
       line-height: 1.15;
       letter-spacing: -0.01em;
       margin-bottom: 20px;
@@ -223,7 +222,7 @@
     .lockscreen-hook h2 {
       font-family: var(--font-display);
       font-size: clamp(32px, 5vw, 56px);
-      font-weight: 400;
+      font-weight: 700;
       line-height: 1.2;
       margin-bottom: 20px;
     }
@@ -279,7 +278,7 @@
     .screenshots h2 {
       font-family: var(--font-display);
       font-size: clamp(28px, 4vw, 44px);
-      font-weight: 400;
+      font-weight: 700;
       text-align: center;
       margin-bottom: 48px;
     }
@@ -317,7 +316,7 @@
     .features h2 {
       font-family: var(--font-display);
       font-size: clamp(28px, 4vw, 44px);
-      font-weight: 400;
+      font-weight: 700;
       text-align: center;
       margin-bottom: 64px;
     }
@@ -373,7 +372,7 @@
     .how h2 {
       font-family: var(--font-display);
       font-size: clamp(28px, 4vw, 44px);
-      font-weight: 400;
+      font-weight: 700;
       text-align: center;
       margin-bottom: 64px;
     }
@@ -511,10 +510,10 @@
     <div class="hero-content">
       <p class="hero-eyebrow">iOS App</p>
 
-      <h1>매일 하나의 색을<br><em>채집</em>하세요</h1>
+      <h1>오늘은 무슨 색을<br><em>채집</em>할까?</h1>
 
       <p class="hero-desc">
-        팬톤에서 영감받은 오늘의 컬러를 받고, 일상 속에서 그 색을 찾아 9장의 사진으로 완성하세요. 완성된 그리드는 잠금화면이 됩니다.
+        매일 달라지는 팬톤 컬러 하나. 거리에서, 카페에서, 하늘에서 그 색을 찾아 9장을 모으면 나만의 잠금화면이 완성돼요.
       </p>
 
       <a class="hero-cta" href="#">
@@ -552,9 +551,9 @@
   <!-- ===== LOCKSCREEN HOOK ===== -->
   <section class="lockscreen-hook">
     <p class="section-label">Auto Wallpaper</p>
-    <h2>채집한 색이<br><em>잠금화면</em>이 됩니다</h2>
+    <h2>오늘 찍은 사진이<br><em>내일의 잠금화면</em></h2>
     <p class="lockscreen-desc">
-      오늘 찍은 사진들이 3x3 그리드로 배열되어 잠금화면 배경으로 자동 설정됩니다. 매일 열 때마다 어제와 다른 나만의 화면.
+      9장을 모으면 3x3 그리드가 잠금화면 배경으로 바뀌어요. 폰을 켤 때마다 어제의 나와 다른 색을 만나요.
     </p>
 
     <div class="lockscreen-gallery">
@@ -566,7 +565,7 @@
 
   <!-- ===== APP SCREENSHOTS ===== -->
   <section class="screenshots">
-    <h2>앱 미리보기</h2>
+    <h2>이렇게 생겼어요</h2>
     <div class="screenshot-scroll">
       <img src="screenshots/home.png" alt="오늘의 컬러 - Primrose Yellow">
       <img src="screenshots/grid-yellow.png" alt="노란색 그리드 진행 중">
@@ -579,64 +578,64 @@
 
   <!-- ===== FEATURES ===== -->
   <section class="features">
-    <h2>당신의 하루를 색으로 채우세요</h2>
+    <h2>이런 게 돼요</h2>
     <div class="feature-grid">
       <div class="feature-cell">
         <span class="feature-num">01</span>
-        <h3>오늘의 팬톤 컬러</h3>
-        <p>매일 새로운 팬톤 컬러가 제안됩니다. 30가지 큐레이션된 컬러가 계절에 맞게 순환합니다.</p>
+        <h3>매일 새로운 색</h3>
+        <p>앱을 열면 오늘의 팬톤 컬러가 나와요. 봄엔 따뜻한 색, 겨울엔 차분한 색. 30가지가 계절에 맞게 돌아요.</p>
       </div>
       <div class="feature-cell">
         <span class="feature-num">02</span>
-        <h3>컬러 매칭 카메라</h3>
-        <p>카메라가 실시간으로 포인트 컬러를 감지합니다. 회색 배경 속 작은 색도 놓치지 않습니다.</p>
+        <h3>카메라가 색을 찾아줘요</h3>
+        <p>카메라를 대면 실시간으로 색을 잡아요. 회색 벽 앞의 빨간 우체통도 알아서 찾아내요.</p>
       </div>
       <div class="feature-cell">
         <span class="feature-num">03</span>
-        <h3>갤러리에서 불러오기</h3>
-        <p>촬영뿐 아니라 기존 사진에서도 색을 채집할 수 있습니다.</p>
+        <h3>갤러리에서도 OK</h3>
+        <p>지금 못 찍어도 괜찮아요. 이미 찍어둔 사진에서 색을 골라 넣을 수 있어요.</p>
       </div>
       <div class="feature-cell">
         <span class="feature-num">04</span>
-        <h3>3x3 컬러 그리드</h3>
-        <p>9장의 사진으로 오늘의 컬러를 완성하세요. 완성된 그리드는 하나의 작품이 됩니다.</p>
+        <h3>9칸을 채우면 완성</h3>
+        <p>3x3 그리드에 사진을 하나씩 채워가요. 다 모으면 그날의 색이 하나의 작품이 돼요.</p>
       </div>
       <div class="feature-cell">
         <span class="feature-num">05</span>
-        <h3>위젯 & 라이브 액티비티</h3>
-        <p>잠금 화면과 홈 화면에서 오늘의 진행 상황을 한눈에 확인하세요.</p>
+        <h3>위젯으로 한눈에</h3>
+        <p>잠금화면, 홈 화면에서 오늘 몇 장 찍었는지 바로 보여요.</p>
       </div>
       <div class="feature-cell">
         <span class="feature-num">06</span>
-        <h3>필름 룩 필터</h3>
-        <p>촬영된 사진에 자동으로 감성적인 아날로그 톤이 입혀집니다.</p>
+        <h3>필름 느낌 자동 보정</h3>
+        <p>찍은 사진에 은은한 필름 톤이 자동으로 입혀져요. 따로 보정할 필요 없어요.</p>
       </div>
     </div>
   </section>
 
   <!-- ===== HOW IT WORKS ===== -->
   <section class="how">
-    <h2>이렇게 사용하세요</h2>
+    <h2>3단계면 끝</h2>
     <div class="steps">
       <div class="step">
         <div class="step-marker">1</div>
         <div>
-          <h3>오늘의 컬러를 확인</h3>
-          <p>앱을 열면 오늘의 팬톤 컬러와 무드, 이야기가 표시됩니다.</p>
+          <h3>앱을 열어요</h3>
+          <p>오늘의 팬톤 컬러와 분위기가 나와요. "오늘은 이 색이구나."</p>
         </div>
       </div>
       <div class="step">
         <div class="step-marker">2</div>
         <div>
-          <h3>색을 찾아 촬영</h3>
-          <p>일상 속에서 그 색을 발견하면 카메라로 촬영하거나, 갤러리에서 불러오세요.</p>
+          <h3>주변에서 색을 찾아요</h3>
+          <p>그 색이 보이면 찍어요. 지금 못 찍으면 갤러리에서 골라도 돼요.</p>
         </div>
       </div>
       <div class="step">
         <div class="step-marker">3</div>
         <div>
-          <h3>그리드 완성</h3>
-          <p>9장의 사진이 채워지면 완성. 공유하거나, 잠금화면으로 설정하세요.</p>
+          <h3>9장이 모이면 끝</h3>
+          <p>완성된 그리드를 공유하거나 잠금화면으로 바로 설정할 수 있어요.</p>
         </div>
       </div>
     </div>
@@ -644,8 +643,8 @@
 
   <!-- ===== FINAL CTA ===== -->
   <section class="final-cta">
-    <h2>하루 한 가지 색,<br>세상이 달라 보입니다</h2>
-    <p>계정 없음. 광고 없음. 추적 없음.</p>
+    <h2>같은 길도<br>다른 색으로 보여요</h2>
+    <p>계정도, 광고도, 추적도 없어요.</p>
     <a class="hero-cta" href="#">
       <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
       App Store에서 다운로드
