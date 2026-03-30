@@ -6,296 +6,282 @@
   <title>색감채집 — 매일 새로운 색을 채집하세요</title>
   <meta name="description" content="매일 하나의 팬톤 컬러를 받고, 일상에서 그 색을 찾아 9장의 사진으로 완성하는 컬러 채집 앱.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --color-today: #0F4C81;
-      --bg: #0a0a0a;
-      --surface: #141414;
-      --text: #f5f5f5;
-      --text-secondary: #999;
+      --accent: #0F4C81;
+      --accent-warm: #E97451;
+      --bg: #060608;
+      --surface: #111114;
+      --surface-hover: #1a1a1f;
+      --text: #ececee;
+      --text-dim: #7a7a85;
+      --text-muted: #4a4a55;
       --radius: 20px;
+      --font-display: 'DM Serif Display', Georgia, serif;
+      --font-body: 'Outfit', -apple-system, sans-serif;
     }
 
+    html { scroll-behavior: smooth; }
+
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: var(--font-body);
       background: var(--bg);
       color: var(--text);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
 
-    /* Hero */
+    /* ==================== HERO — Lock Screen Focus ==================== */
     .hero {
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
       align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 60px 24px;
+      gap: 40px;
+      padding: 80px clamp(24px, 5vw, 80px);
+      max-width: 1200px;
+      margin: 0 auto;
       position: relative;
-      overflow: hidden;
     }
 
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: -40%;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(circle, var(--color-today) 0%, transparent 70%);
-      opacity: 0.15;
-      pointer-events: none;
-    }
+    .hero-content { z-index: 2; }
 
-    .hero-badge {
+    .hero-eyebrow {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 6px 16px;
-      border-radius: 100px;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.1);
-      font-size: 13px;
-      color: var(--text-secondary);
-      margin-bottom: 32px;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 24px;
     }
 
-    .hero-badge .dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--color-today);
+    .hero-eyebrow::before {
+      content: '';
+      width: 24px;
+      height: 1px;
+      background: var(--accent);
     }
 
-    .app-names {
-      font-size: clamp(14px, 2vw, 16px);
-      color: var(--text-secondary);
-      letter-spacing: 0.1em;
-      margin-bottom: 16px;
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(36px, 5.5vw, 64px);
       font-weight: 400;
-    }
-
-    h1 {
-      font-size: clamp(40px, 8vw, 72px);
-      font-weight: 700;
-      letter-spacing: -0.03em;
-      line-height: 1.1;
+      line-height: 1.15;
+      letter-spacing: -0.01em;
       margin-bottom: 20px;
     }
 
-    h1 span {
-      background: linear-gradient(135deg, var(--color-today), #6fa3d8);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+    .hero h1 em {
+      font-style: italic;
+      color: var(--accent-warm);
     }
 
-    .hero-sub {
-      font-size: clamp(16px, 2.5vw, 20px);
-      color: var(--text-secondary);
-      max-width: 480px;
-      margin-bottom: 40px;
+    .hero-desc {
+      font-size: 16px;
+      color: var(--text-dim);
+      max-width: 420px;
+      margin-bottom: 36px;
       font-weight: 300;
+      line-height: 1.7;
     }
 
-    .cta-group {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    .cta {
+    .hero-cta {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      padding: 14px 28px;
-      border-radius: 14px;
-      font-size: 15px;
-      font-weight: 600;
-      text-decoration: none;
-      transition: transform 0.2s, opacity 0.2s;
-    }
-
-    .cta:hover { transform: translateY(-2px); }
-
-    .cta-primary {
+      gap: 10px;
+      padding: 14px 32px;
+      border-radius: 100px;
       background: var(--text);
       color: var(--bg);
-    }
-
-    .cta svg { width: 18px; height: 18px; }
-
-    /* Color strip */
-    .color-strip {
-      display: flex;
-      gap: 6px;
-      margin-top: 60px;
-    }
-
-    .color-strip .swatch {
-      width: 32px;
-      height: 32px;
-      border-radius: 8px;
-      transition: transform 0.3s;
-    }
-
-    .color-strip .swatch:hover { transform: scale(1.3); }
-
-    /* Features */
-    .features {
-      padding: 120px 24px;
-      max-width: 960px;
-      margin: 0 auto;
-    }
-
-    .features h2 {
-      font-size: clamp(28px, 5vw, 40px);
-      font-weight: 700;
-      text-align: center;
-      margin-bottom: 64px;
-      letter-spacing: -0.02em;
-    }
-
-    .feature-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 20px;
-    }
-
-    .feature-card {
-      background: var(--surface);
-      border: 1px solid rgba(255,255,255,0.06);
-      border-radius: var(--radius);
-      padding: 32px;
-      transition: border-color 0.3s;
-    }
-
-    .feature-card:hover {
-      border-color: rgba(255,255,255,0.15);
-    }
-
-    .feature-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 12px;
-      background: rgba(255,255,255,0.06);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 20px;
-      margin-bottom: 16px;
-    }
-
-    .feature-card h3 {
-      font-size: 17px;
       font-weight: 600;
-      margin-bottom: 8px;
-    }
-
-    .feature-card p {
       font-size: 14px;
-      color: var(--text-secondary);
-      line-height: 1.5;
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: transform 0.25s, box-shadow 0.25s;
     }
 
-    /* How it works */
-    .how {
-      padding: 100px 24px;
-      max-width: 720px;
-      margin: 0 auto;
+    .hero-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(255,255,255,0.1);
     }
 
-    .how h2 {
-      font-size: clamp(28px, 5vw, 40px);
-      font-weight: 700;
-      text-align: center;
-      margin-bottom: 64px;
-      letter-spacing: -0.02em;
-    }
+    .hero-cta svg { width: 16px; height: 16px; }
 
-    .steps {
-      display: flex;
-      flex-direction: column;
-      gap: 40px;
-    }
-
-    .step {
-      display: flex;
-      gap: 24px;
-      align-items: flex-start;
-    }
-
-    .step-num {
-      width: 40px;
-      height: 40px;
-      border-radius: 12px;
-      background: var(--color-today);
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 700;
-      font-size: 16px;
-      flex-shrink: 0;
-    }
-
-    .step h3 {
-      font-size: 18px;
-      font-weight: 600;
-      margin-bottom: 4px;
-    }
-
-    .step p {
-      font-size: 15px;
-      color: var(--text-secondary);
-    }
-
-    /* Footer */
-    footer {
-      text-align: center;
-      padding: 60px 24px;
-      border-top: 1px solid rgba(255,255,255,0.06);
-    }
-
-    footer p {
-      color: var(--text-secondary);
+    .hero-names {
+      margin-top: 32px;
       font-size: 13px;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
     }
 
-    footer a {
-      color: var(--text-secondary);
-      text-decoration: underline;
-      text-underline-offset: 3px;
-    }
-
-    footer a:hover { color: var(--text); }
-
-    .footer-links {
+    /* Hero — Phone mockup with lock screen */
+    .hero-visual {
+      position: relative;
       display: flex;
-      gap: 24px;
       justify-content: center;
+      align-items: center;
+    }
+
+    .phone-frame {
+      position: relative;
+      width: clamp(240px, 22vw, 300px);
+      z-index: 2;
+    }
+
+    .phone-frame img {
+      width: 100%;
+      border-radius: 36px;
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.08),
+        0 40px 80px rgba(0,0,0,0.6),
+        0 0 120px rgba(15,76,129,0.15);
+    }
+
+    .phone-glow {
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(233,116,81,0.12) 0%, transparent 70%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 0;
+      animation: pulse-glow 4s ease-in-out infinite alternate;
+    }
+
+    @keyframes pulse-glow {
+      from { opacity: 0.6; transform: translate(-50%, -50%) scale(0.9); }
+      to { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+    }
+
+    /* Floating second phone */
+    .phone-secondary {
+      position: absolute;
+      width: clamp(160px, 14vw, 200px);
+      right: -20px;
+      bottom: -40px;
+      z-index: 3;
+      transform: rotate(4deg);
+    }
+
+    .phone-secondary img {
+      width: 100%;
+      border-radius: 24px;
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.06),
+        0 20px 60px rgba(0,0,0,0.5);
+    }
+
+    /* ==================== COLOR BAR ==================== */
+    .color-bar {
+      display: flex;
+      width: 100%;
+      height: 4px;
+      overflow: hidden;
+    }
+
+    .color-bar span { flex: 1; }
+
+    /* ==================== LOCKSCREEN HERO SECTION ==================== */
+    .lockscreen-hook {
+      padding: 140px clamp(24px, 5vw, 80px);
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+      position: relative;
+    }
+
+    .lockscreen-hook::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(ellipse, rgba(15,76,129,0.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
       margin-bottom: 16px;
     }
 
-    /* Screenshots */
+    .lockscreen-hook h2 {
+      font-family: var(--font-display);
+      font-size: clamp(32px, 5vw, 56px);
+      font-weight: 400;
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+
+    .lockscreen-hook h2 em {
+      font-style: italic;
+      color: var(--accent-warm);
+    }
+
+    .lockscreen-desc {
+      font-size: 16px;
+      color: var(--text-dim);
+      max-width: 520px;
+      margin: 0 auto 60px;
+      font-weight: 300;
+      line-height: 1.7;
+    }
+
+    .lockscreen-gallery {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      gap: clamp(16px, 3vw, 32px);
+      perspective: 800px;
+    }
+
+    .lockscreen-gallery img {
+      width: clamp(180px, 20vw, 260px);
+      border-radius: 28px;
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.06),
+        0 30px 60px rgba(0,0,0,0.5);
+      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .lockscreen-gallery img:hover {
+      transform: translateY(-12px) scale(1.02);
+    }
+
+    .lockscreen-gallery img:nth-child(1) { transform: rotate(-3deg) translateY(20px); }
+    .lockscreen-gallery img:nth-child(2) { transform: scale(1.05); z-index: 2; }
+    .lockscreen-gallery img:nth-child(3) { transform: rotate(3deg) translateY(20px); }
+
+    .lockscreen-gallery img:nth-child(2):hover {
+      transform: scale(1.08) translateY(-8px);
+    }
+
+    /* ==================== SCREENSHOTS SCROLL ==================== */
     .screenshots {
-      padding: 80px 24px 0;
-      max-width: 1080px;
-      margin: 0 auto;
+      padding: 120px 0 0;
     }
 
     .screenshots h2 {
-      font-size: clamp(28px, 5vw, 40px);
-      font-weight: 700;
+      font-family: var(--font-display);
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 400;
       text-align: center;
       margin-bottom: 48px;
-      letter-spacing: -0.02em;
     }
 
     .screenshot-scroll {
@@ -304,7 +290,7 @@
       overflow-x: auto;
       scroll-snap-type: x mandatory;
       -webkit-overflow-scrolling: touch;
-      padding-bottom: 20px;
+      padding: 0 clamp(24px, 5vw, 80px) 32px;
       scrollbar-width: none;
     }
 
@@ -312,106 +298,273 @@
 
     .screenshot-scroll img {
       flex-shrink: 0;
-      width: 260px;
+      width: 240px;
       border-radius: 24px;
-      border: 1px solid rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.06);
       scroll-snap-align: center;
+      transition: transform 0.3s;
     }
 
-    /* Showcase — side by side */
-    .showcase {
-      padding: 100px 24px;
-      max-width: 960px;
+    .screenshot-scroll img:hover { transform: scale(1.03); }
+
+    /* ==================== FEATURES ==================== */
+    .features {
+      padding: 140px clamp(24px, 5vw, 80px);
+      max-width: 1000px;
       margin: 0 auto;
     }
 
-    .showcase h2 {
-      font-size: clamp(28px, 5vw, 40px);
-      font-weight: 700;
+    .features h2 {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 400;
       text-align: center;
       margin-bottom: 64px;
-      letter-spacing: -0.02em;
     }
 
-    .showcase-row {
+    .feature-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 32px;
-      align-items: center;
-      margin-bottom: 64px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
     }
 
-    .showcase-row.reverse { direction: rtl; }
-    .showcase-row.reverse > * { direction: ltr; }
-
-    .showcase-img {
-      width: 100%;
-      max-width: 280px;
-      border-radius: 24px;
-      border: 1px solid rgba(255,255,255,0.08);
-      justify-self: center;
+    .feature-cell {
+      background: var(--surface);
+      padding: 36px 28px;
+      transition: background 0.3s;
+      position: relative;
     }
 
-    .showcase-text h3 {
-      font-size: 22px;
+    .feature-cell:hover { background: var(--surface-hover); }
+
+    .feature-cell:first-child { border-radius: var(--radius) 0 0 0; }
+    .feature-cell:nth-child(3) { border-radius: 0 var(--radius) 0 0; }
+    .feature-cell:nth-child(4) { border-radius: 0 0 0 var(--radius); }
+    .feature-cell:last-child { border-radius: 0 0 var(--radius) 0; }
+
+    .feature-num {
+      font-family: var(--font-display);
+      font-size: 32px;
+      color: rgba(255,255,255,0.06);
+      position: absolute;
+      top: 16px;
+      right: 20px;
+    }
+
+    .feature-cell h3 {
+      font-size: 16px;
       font-weight: 600;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
 
-    .showcase-text p {
-      font-size: 15px;
-      color: var(--text-secondary);
+    .feature-cell p {
+      font-size: 13px;
+      color: var(--text-dim);
       line-height: 1.6;
     }
 
-    @media (max-width: 640px) {
-      .showcase-row {
+    /* ==================== HOW IT WORKS ==================== */
+    .how {
+      padding: 120px clamp(24px, 5vw, 80px);
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .how h2 {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 400;
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .steps { display: flex; flex-direction: column; gap: 48px; }
+
+    .step {
+      display: flex;
+      gap: 28px;
+      align-items: flex-start;
+    }
+
+    .step-marker {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: 20px;
+      color: var(--text-dim);
+      flex-shrink: 0;
+    }
+
+    .step h3 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .step p {
+      font-size: 14px;
+      color: var(--text-dim);
+      line-height: 1.6;
+    }
+
+    /* ==================== FINAL CTA ==================== */
+    .final-cta {
+      text-align: center;
+      padding: 100px 24px 120px;
+      position: relative;
+    }
+
+    .final-cta::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 400px;
+      background: radial-gradient(ellipse, rgba(233,116,81,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .final-cta h2 {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 400;
+      margin-bottom: 12px;
+    }
+
+    .final-cta p {
+      color: var(--text-dim);
+      font-size: 15px;
+      margin-bottom: 32px;
+    }
+
+    /* ==================== FOOTER ==================== */
+    footer {
+      text-align: center;
+      padding: 40px 24px;
+      border-top: 1px solid rgba(255,255,255,0.04);
+    }
+
+    footer p { color: var(--text-muted); font-size: 12px; }
+
+    footer a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    footer a:hover { color: var(--text-dim); }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+      margin-bottom: 12px;
+      font-size: 12px;
+    }
+
+    /* ==================== RESPONSIVE ==================== */
+    @media (max-width: 768px) {
+      .hero {
         grid-template-columns: 1fr;
         text-align: center;
+        padding-top: 120px;
+        gap: 60px;
       }
-      .showcase-row.reverse { direction: ltr; }
-      .showcase-img { max-width: 240px; }
-      .screenshot-scroll img { width: 220px; }
+      .hero-desc { margin-left: auto; margin-right: auto; }
+      .hero-content { order: 1; }
+      .hero-visual { order: 0; }
+      .phone-secondary { right: -10px; bottom: -20px; }
+
+      .lockscreen-gallery {
+        flex-direction: row;
+        overflow-x: auto;
+        padding: 0 24px;
+        justify-content: flex-start;
+      }
+      .lockscreen-gallery img {
+        transform: none !important;
+        flex-shrink: 0;
+        width: 200px;
+      }
+
+      .feature-grid {
+        grid-template-columns: 1fr;
+        gap: 1px;
+      }
+      .feature-cell { border-radius: 0 !important; }
+      .feature-cell:first-child { border-radius: var(--radius) var(--radius) 0 0 !important; }
+      .feature-cell:last-child { border-radius: 0 0 var(--radius) var(--radius) !important; }
     }
   </style>
 </head>
 <body>
 
+  <!-- ===== HERO ===== -->
   <section class="hero">
-    <div class="hero-badge">
-      <div class="dot"></div>
-      iOS App
-    </div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">iOS App</p>
 
-    <p class="app-names">색감채집 / Color Foraging / 色あつめ</p>
+      <h1>매일 하나의 색을<br><em>채집</em>하세요</h1>
 
-    <h1>매일 하나의 색,<br><span>색감채집</span></h1>
+      <p class="hero-desc">
+        팬톤에서 영감받은 오늘의 컬러를 받고, 일상 속에서 그 색을 찾아 9장의 사진으로 완성하세요. 완성된 그리드는 잠금화면이 됩니다.
+      </p>
 
-    <p class="hero-sub">
-      오늘의 팬톤 컬러를 받고, 일상 속에서 그 색을 찾아 9장의 사진으로 하루를 완성하세요.
-    </p>
-
-    <div class="cta-group">
-      <a class="cta cta-primary" href="#">
+      <a class="hero-cta" href="#">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
         App Store
       </a>
+
+      <p class="hero-names">색감채집 / Color Foraging / 色あつめ</p>
     </div>
 
-    <div class="color-strip">
-      <div class="swatch" style="background:#0F4C81"></div>
-      <div class="swatch" style="background:#B19CD9"></div>
-      <div class="swatch" style="background:#DD4132"></div>
-      <div class="swatch" style="background:#F7CAC9"></div>
-      <div class="swatch" style="background:#88B04B"></div>
-      <div class="swatch" style="background:#F6D155"></div>
-      <div class="swatch" style="background:#FF6F61"></div>
-      <div class="swatch" style="background:#2BAE66"></div>
-      <div class="swatch" style="background:#E97451"></div>
+    <div class="hero-visual">
+      <div class="phone-glow"></div>
+      <div class="phone-frame">
+        <img src="screenshots/lockscreen.png" alt="잠금화면에 표시된 컬러 그리드">
+      </div>
+      <div class="phone-secondary">
+        <img src="screenshots/widget-large.png" alt="홈 화면 위젯">
+      </div>
     </div>
   </section>
 
-  <!-- App Screenshots -->
+  <!-- ===== COLOR BAR ===== -->
+  <div class="color-bar">
+    <span style="background:#0F4C81"></span>
+    <span style="background:#B19CD9"></span>
+    <span style="background:#DD4132"></span>
+    <span style="background:#F7CAC9"></span>
+    <span style="background:#88B04B"></span>
+    <span style="background:#F6D155"></span>
+    <span style="background:#FF6F61"></span>
+    <span style="background:#2BAE66"></span>
+    <span style="background:#E97451"></span>
+  </div>
+
+  <!-- ===== LOCKSCREEN HOOK ===== -->
+  <section class="lockscreen-hook">
+    <p class="section-label">Auto Wallpaper</p>
+    <h2>채집한 색이<br><em>잠금화면</em>이 됩니다</h2>
+    <p class="lockscreen-desc">
+      오늘 찍은 사진들이 3x3 그리드로 배열되어 잠금화면 배경으로 자동 설정됩니다. 매일 열 때마다 어제와 다른 나만의 화면.
+    </p>
+
+    <div class="lockscreen-gallery">
+      <img src="screenshots/lockscreen.png" alt="벚꽃 잠금화면">
+      <img src="screenshots/grid-yellow.png" alt="노란색 그리드">
+      <img src="screenshots/grid-blue.png" alt="파란색 그리드">
+    </div>
+  </section>
+
+  <!-- ===== APP SCREENSHOTS ===== -->
   <section class="screenshots">
     <h2>앱 미리보기</h2>
     <div class="screenshot-scroll">
@@ -424,95 +577,87 @@
     </div>
   </section>
 
-  <!-- Showcase: Lock Screen & Widget -->
-  <section class="showcase">
-    <h2>잠금화면까지, 색으로 가득</h2>
-
-    <div class="showcase-row">
-      <img class="showcase-img" src="screenshots/lockscreen.png" alt="잠금화면 배경">
-      <div class="showcase-text">
-        <h3>자동 잠금화면 배경</h3>
-        <p>완성된 컬러 그리드가 잠금화면 배경으로 자동 설정됩니다. iOS 단축어와 연동해 앱을 열 때마다 업데이트되는 나만의 컬러 잠금화면.</p>
-      </div>
-    </div>
-
-    <div class="showcase-row reverse">
-      <img class="showcase-img" src="screenshots/widget-large.png" alt="홈 화면 위젯">
-      <div class="showcase-text">
-        <h3>홈 화면 위젯</h3>
-        <p>3x3 대형 위젯으로 오늘의 컬러 그리드를 홈 화면에서 바로 확인하세요. 사진이 채워질 때마다 실시간으로 업데이트됩니다.</p>
-      </div>
-    </div>
-  </section>
-
+  <!-- ===== FEATURES ===== -->
   <section class="features">
     <h2>당신의 하루를 색으로 채우세요</h2>
     <div class="feature-grid">
-      <div class="feature-card">
-        <div class="feature-icon">🎨</div>
+      <div class="feature-cell">
+        <span class="feature-num">01</span>
         <h3>오늘의 팬톤 컬러</h3>
         <p>매일 새로운 팬톤 컬러가 제안됩니다. 30가지 큐레이션된 컬러가 계절에 맞게 순환합니다.</p>
       </div>
-      <div class="feature-card">
-        <div class="feature-icon">📷</div>
+      <div class="feature-cell">
+        <span class="feature-num">02</span>
         <h3>컬러 매칭 카메라</h3>
-        <p>카메라가 실시간으로 색을 감지합니다. 프레임 안에서 가장 선명한 포인트 컬러를 자동으로 찾아냅니다.</p>
+        <p>카메라가 실시간으로 포인트 컬러를 감지합니다. 회색 배경 속 작은 색도 놓치지 않습니다.</p>
       </div>
-      <div class="feature-card">
-        <div class="feature-icon">🖼️</div>
+      <div class="feature-cell">
+        <span class="feature-num">03</span>
         <h3>갤러리에서 불러오기</h3>
-        <p>촬영뿐 아니라 기존 사진에서도 색을 채집할 수 있습니다. 카메라와 갤러리를 자유롭게 오가세요.</p>
+        <p>촬영뿐 아니라 기존 사진에서도 색을 채집할 수 있습니다.</p>
       </div>
-      <div class="feature-card">
-        <div class="feature-icon">🔲</div>
+      <div class="feature-cell">
+        <span class="feature-num">04</span>
         <h3>3x3 컬러 그리드</h3>
         <p>9장의 사진으로 오늘의 컬러를 완성하세요. 완성된 그리드는 하나의 작품이 됩니다.</p>
       </div>
-      <div class="feature-card">
-        <div class="feature-icon">📱</div>
+      <div class="feature-cell">
+        <span class="feature-num">05</span>
         <h3>위젯 & 라이브 액티비티</h3>
-        <p>잠금 화면에서 오늘의 컬러와 진행 상황을 확인하세요.</p>
+        <p>잠금 화면과 홈 화면에서 오늘의 진행 상황을 한눈에 확인하세요.</p>
       </div>
-      <div class="feature-card">
-        <div class="feature-icon">🎞️</div>
+      <div class="feature-cell">
+        <span class="feature-num">06</span>
         <h3>필름 룩 필터</h3>
-        <p>촬영된 사진에 자동으로 감성적인 필름 톤이 입혀집니다.</p>
+        <p>촬영된 사진에 자동으로 감성적인 아날로그 톤이 입혀집니다.</p>
       </div>
     </div>
   </section>
 
+  <!-- ===== HOW IT WORKS ===== -->
   <section class="how">
     <h2>이렇게 사용하세요</h2>
     <div class="steps">
       <div class="step">
-        <div class="step-num">1</div>
+        <div class="step-marker">1</div>
         <div>
           <h3>오늘의 컬러를 확인</h3>
-          <p>앱을 열면 오늘의 팬톤 컬러와 무드가 표시됩니다.</p>
+          <p>앱을 열면 오늘의 팬톤 컬러와 무드, 이야기가 표시됩니다.</p>
         </div>
       </div>
       <div class="step">
-        <div class="step-num">2</div>
+        <div class="step-marker">2</div>
         <div>
           <h3>색을 찾아 촬영</h3>
-          <p>일상 속에서 그 색을 발견하면 카메라로 촬영하거나, 갤러리에서 사진을 불러오세요.</p>
+          <p>일상 속에서 그 색을 발견하면 카메라로 촬영하거나, 갤러리에서 불러오세요.</p>
         </div>
       </div>
       <div class="step">
-        <div class="step-num">3</div>
+        <div class="step-marker">3</div>
         <div>
           <h3>그리드 완성</h3>
-          <p>9장의 사진으로 오늘의 컬러 그리드를 채우면 완성! 공유하거나 저장하세요.</p>
+          <p>9장의 사진이 채워지면 완성. 공유하거나, 잠금화면으로 설정하세요.</p>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- ===== FINAL CTA ===== -->
+  <section class="final-cta">
+    <h2>하루 한 가지 색,<br>세상이 달라 보입니다</h2>
+    <p>계정 없음. 광고 없음. 추적 없음.</p>
+    <a class="hero-cta" href="#">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+      App Store에서 다운로드
+    </a>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
   <footer>
     <div class="footer-links">
       <a href="privacy.html">개인정보 처리방침</a>
     </div>
-    <p>&copy; 2026 색감채집 (Color Foraging). All rights reserved.</p>
+    <p>&copy; 2026 색감채집 (Color Foraging)</p>
   </footer>
 
 </body>
